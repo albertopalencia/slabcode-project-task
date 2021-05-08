@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <ProjectGuid>{f2ee57b0-ad00-41c7-9fa2-84c6f572a3df}</ProjectGuid>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Abstract\Usuario\**" />
+    <EmbeddedResource Remove="Abstract\Usuario\**" />
+    <None Remove="Abstract\Usuario\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Implements\DepartamentoService.cs" />
+    <Compile Remove="Implements\MunicipioService.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\SlabCode.Domain\SlabCode.Domain.csproj" />
+    <ProjectReference Include="..\SlabCode.Infrastructure\SlabCode.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
