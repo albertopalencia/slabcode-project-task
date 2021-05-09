@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using SlabCode.Common.Enumerations;
 using SlabCode.Domain.Entities;
 
@@ -23,31 +24,30 @@ namespace SlabCode.Domain.DTO.User
 
 	public class UserCreateDto
 	{
+		public UserCreateDto()
+		{
+			 
+			Role = RoleType.Operator;
+		}
+
 		/// <summary>
 		/// Gets or sets the name of the user.
 		/// </summary>
 		/// <value>The name of the user.</value>
 		public string UserName { get; set; }
-		/// <summary>
-		/// Gets or sets the password.
-		/// </summary>
-		/// <value>The password.</value>
-		public string Password { get; set; }
+
+		 
 		/// <summary>
 		/// Gets or sets the email.
 		/// </summary>
 		/// <value>The email.</value>
 		public string Email { get; set; }
-		/// <summary>
-		/// Gets or sets the active.
-		/// </summary>
-		/// <value>The active.</value>
-		public UserState Active { get; set; }
+
 		/// <summary>
 		/// Gets or sets the role.
 		/// </summary>
 		/// <value>The role.</value>
-		public RoleType Role { get; set; }
+		private RoleType Role { get; }
 
 		/// <summary>
 		/// Performs an implicit conversion from <see cref="UserCreateDto"/> to <see cref="UserEntity"/>.
@@ -57,14 +57,14 @@ namespace SlabCode.Domain.DTO.User
 		public static implicit operator UserEntity(UserCreateDto user)
 		{
 			return new()
-			{
-				
-				Password = user.Password,
-				UserName = user.UserName,
+			{  
+				UserName = user.UserName.ToLower(),
 				Email = user.Email,
 				Role = user.Role,
-				Active = user.Active
+				Active = UserState.Active,
+				DateChangePassword = DateTime.Now,
+				RequireChangePassword = true
 			};
-		}
+		} 
 	}
 }

@@ -64,10 +64,11 @@ namespace SlabCode.Api.CustomExceptionMiddleware
 			context.Response.ContentType = "application/json";
 			context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
+			
 			await context.Response.WriteAsync(new 
 			{
 				context.Response.StatusCode,
-				Message = "Internal Server Error from the custom middleware."
+				exception.Message
 			}.ToString() ?? string.Empty);
 		}
 	}

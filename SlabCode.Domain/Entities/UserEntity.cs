@@ -4,13 +4,15 @@
 // Created          : 05-06-2021
 //
 // Last Modified By : Alberto Palencia
-// Last Modified On : 05-07-2021
+// Last Modified On : 05-08-2021
 // ***********************************************************************
 // <copyright file="UserEntity.cs" company="SlabCode.Domain">
 //     Copyright (c) AlbertPalencia. All rights reserved.
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
+using System;
 using SlabCode.Common.Enumerations;
 
 namespace SlabCode.Domain.Entities
@@ -47,5 +49,15 @@ namespace SlabCode.Domain.Entities
         /// </summary>
         /// <value>The role.</value>
         public RoleType Role { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether [require change password].
+        /// </summary>
+        /// <value><c>true</c> if [require change password]; otherwise, <c>false</c>.</value>
+        public bool RequireChangePassword { get; set; }
+        /// <summary>
+        /// Gets or sets the date change password.
+        /// </summary>
+        /// <value>The date change password.</value>
+        public DateTime DateChangePassword { get; set; }
     }
 }

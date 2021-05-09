@@ -18,20 +18,20 @@ using SlabCode.Domain.Entities;
 
 namespace SlabCode.Infrastructure.DataAccess.Configurations
 {
-	/// <summary>
-	/// Class TaskConfiguration.
-	/// Implements the <see cref="TaskEntity" />
-	/// Implements the <see cref="Microsoft.EntityFrameworkCore.IEntityTypeConfiguration{SlabCode.Domain.Entities.TaskEntity}" />
-	/// </summary>
-	/// <seealso cref="Microsoft.EntityFrameworkCore.IEntityTypeConfiguration{SlabCode.Domain.Entities.TaskEntity}" />
-	/// <seealso cref="TaskEntity" />
-	public class TaskConfiguration : IEntityTypeConfiguration<TaskEntity>
+    /// <summary>
+    /// Class TaskConfiguration.
+    /// Implements the <see cref="TaskEntity" />
+    /// Implements the <see cref="Microsoft.EntityFrameworkCore.IEntityTypeConfiguration{SlabCode.Domain.Entities.TaskEntity}" />
+    /// </summary>
+    /// <seealso cref="Microsoft.EntityFrameworkCore.IEntityTypeConfiguration{SlabCode.Domain.Entities.TaskEntity}" />
+    /// <seealso cref="TaskEntity" />
+    public class TaskConfiguration : IEntityTypeConfiguration<TaskEntity>
     {
-		/// <summary>
-		/// Configures the entity of type <typeparamref name="TEntity" />.
-		/// </summary>
-		/// <param name="builder">The builder to be used to configure the entity type.</param>
-		public void Configure(EntityTypeBuilder<TaskEntity> builder)
+        /// <summary>
+        /// Configures the entity of type <typeparamref name="TEntity" />.
+        /// </summary>
+        /// <param name="builder">The builder to be used to configure the entity type.</param>
+        public void Configure(EntityTypeBuilder<TaskEntity> builder)
         {
             builder.ToTable("Tarea");
 
@@ -50,11 +50,11 @@ namespace SlabCode.Infrastructure.DataAccess.Configurations
 
          
             builder.Property(e => e.TaskState)
-	            .HasColumnName("Estado")
-	            .IsRequired()
-	            .HasConversion(
-		            t => t.Id,
-		            t => Enumeration.FromValue<TaskState>(t)); 
+                .HasColumnName("Estado")
+                .IsRequired()
+                .HasConversion(
+                    t => t.Id,
+                    t => Enumeration.FromValue<TaskState>(t)); 
 
 
         builder.Property(i => i.Description)

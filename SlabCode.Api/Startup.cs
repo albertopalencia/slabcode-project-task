@@ -15,19 +15,18 @@
 namespace SlabCode.Api
 {
 	using Application.Abstract;
+	using Application.Implements;
+	using CustomExceptionMiddleware;
 	using Filters;
 	using FluentValidation.AspNetCore;
+	using Infrastructure.Extensions;
 	using Microsoft.AspNetCore.Authentication.JwtBearer;
 	using Microsoft.AspNetCore.Builder;
 	using Microsoft.AspNetCore.Hosting;
-	using Microsoft.AspNetCore.Http;
 	using Microsoft.Extensions.Configuration;
 	using Microsoft.Extensions.DependencyInjection;
 	using Microsoft.Extensions.Hosting;
 	using Microsoft.IdentityModel.Tokens;
-	using CustomExceptionMiddleware;
-	using Application.Implements;
-	using Infrastructure.Extensions;
 	using System;
 	using System.Reflection;
 	using System.Text;
@@ -67,6 +66,8 @@ namespace SlabCode.Api
 				options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 			});
 
+			AddAuthentication(services);
+
 			ConfigureServicesAdd(services);
 		}
 
@@ -85,8 +86,6 @@ namespace SlabCode.Api
 			services.AddServicesRepositories();
 
 			services.AddSwagger($"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
-
-			AddAuthentication(services);
 
 			services.AddCors(o => o.AddPolicy("AllowClientApp", builder =>
 			{
@@ -110,8 +109,6 @@ namespace SlabCode.Api
 				app.UseDeveloperExceptionPage();
 			}
 
-			app.UseHttpsRedirection();
-
 			app.UseSwagger();
 			app.UseSwaggerUI(options =>
 			{
@@ -120,36 +117,12 @@ namespace SlabCode.Api
 				options.DefaultModelsExpandDepth(-1);
 			});
 
+			app.UseHttpsRedirection();
 			app.UseRouting();
-
-			app.UseAuthentication();
-
-			app.UseAuthorization();
-
-			app.UseResponseCaching();
-
-			app.Use(async (context, next) =>
-			{
-				context.Response.GetTypedHeaders().CacheControl =
-					new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
-					{
-						Public = true,
-						MaxAge = TimeSpan.FromSeconds(5)
-					};
-				context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
-					new[] { "Accept-Encoding" };
-
-				await next();
-			});
-
 			app.UseMiddleware<ExceptionMiddleware>();
-
-			app.UseCors("AllowClientApp");
-
-			app.UseEndpoints(endpoints =>
-			{
-				endpoints.MapControllers();
-			});
+			app.UseAuthentication();
+			app.UseAuthorization();
+			app.UseEndpoints(endpoints => endpoints.MapControllers());
 		}
 
 		/// <summary>
@@ -181,9 +154,9 @@ namespace SlabCode.Api
 					ValidateAudience = true,
 					ValidateLifetime = true,
 					ValidateIssuerSigningKey = true,
-					ValidIssuer = Configuration[Common.Enumerations.Authentication.Editor.Name],
-					ValidAudience = Configuration[Common.Enumerations.Authentication.Audience.Name],
-					IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[Common.Enumerations.Authentication.SecretyKey.Name]))
+					ValidIssuer = Configuration["Authentication:Issuer"],
+					ValidAudience = Configuration["Authentication:Audience"],
+					IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Authentication:SecretKey"]))
 				};
 			});
 		}

@@ -4,16 +4,16 @@
 // Created          : 05-07-2021
 //
 // Last Modified By : Alberto Palencia
-// Last Modified On : 05-07-2021
+// Last Modified On : 05-08-2021
 // ***********************************************************************
 // <copyright file="IUserService.cs" company="SlabCode.Application">
 //     Copyright (c) AlbertPalencia. All rights reserved.
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using SlabCode.Domain.DTO.User;
 using System.Threading.Tasks;
 using SlabCode.Domain.DTO;
-using SlabCode.Domain.DTO.User;
 
 namespace SlabCode.Application.Abstract
 {
@@ -27,6 +27,26 @@ namespace SlabCode.Application.Abstract
 		/// </summary>
 		/// <param name="user">The user.</param>
 		/// <returns>Task&lt;UserResponseDto&gt;.</returns>
-		Task<ResponseGenericDto<UserResponseDto>> ValidateUser(UserLoginDto user);
+		Task<UserResponseDto> ValidateUser(UserLoginDto user);
+
+		/// <summary>
+		/// Creates the specified user.
+		/// </summary>
+		/// <param name="user">The user.</param>
+		/// <returns>Task&lt;UserResponseDto&gt;.</returns>
+		Task<ResponseGenericDto<bool>> Create(UserCreateDto user);
+		/// <summary>
+		/// Updates the password.
+		/// </summary>
+		/// <param name="user">The user.</param>
+		/// <returns>Task&lt;ResponseGenericDto&lt;System.Boolean&gt;&gt;.</returns>
+		Task<ResponseGenericDto<bool>> UpdatePassword(UserUpdatePasswordDto user);
+
+		/// <summary>
+		/// Users the inactivate.
+		/// </summary>
+		/// <param name="userInactivate">The userInactivate.</param>
+		/// <returns>Task&lt;ResponseGenericDto&lt;System.Boolean&gt;&gt;.</returns>
+		Task<ResponseGenericDto<bool>> UserInactivate(UserInactivateDto userInactivate);
 	}
 }

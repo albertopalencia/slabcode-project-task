@@ -1,28 +1,27 @@
 ﻿// ***********************************************************************
-// Assembly         : SlabCode.Api
+// Assembly         : SlabCode.Domain
 // Author           : Alberto Palencia
 // Created          : 05-08-2021
 //
 // Last Modified By : Alberto Palencia
 // Last Modified On : 05-08-2021
 // ***********************************************************************
-// <copyright file="TaskController.cs" company="SlabCode.Api">
+// <copyright file="UserInactivateDto.cs" company="SlabCode.Domain">
 //     Copyright (c) AlbertPalencia. All rights reserved.
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using Microsoft.AspNetCore.Mvc;
-
-namespace SlabCode.Api.Controllers
+namespace SlabCode.Domain.DTO.User
 {
 	/// <summary>
-	/// Class TaskController.
-	/// Implements the <see cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
+	/// Class UserInactivateDto.
 	/// </summary>
-	/// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
-	[Route("api/[controller]")]
-	[ApiController]
-	public class TaskController : ControllerBase
+	public class UserInactivateDto
 	{
+		/// <summary>
+		/// Gets or sets the name of the user.
+		/// </summary>
+		/// <value>The name of the user.</value>
+		public string UserName { get; set; }
 	}
 }

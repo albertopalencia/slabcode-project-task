@@ -71,6 +71,18 @@ namespace SlabCode.Infrastructure.DataAccess.Configurations
 									r => r.Id,
 									r => Enumeration.FromValue<RoleType>(r)
 								 );
+
+
+			builder.Property(e => e.RequireChangePassword)
+				.HasColumnName("CambioContrasena")
+				.IsRequired()
+				.IsUnicode(false);
+
+
+			builder.Property(e => e.DateChangePassword)
+				.HasColumnName("FechaCambioContrasena")
+				.HasColumnType("date");
+
 		}
 	}
 }

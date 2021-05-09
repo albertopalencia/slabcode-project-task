@@ -4,7 +4,7 @@
 // Created          : 03-25-2021
 //
 // Last Modified By : Alberto Palencia
-// Last Modified On : 05-06-2021
+// Last Modified On : 05-08-2021
 // ***********************************************************************
 // <copyright file="GenericRepository.cs" company="SlabCode.Infrastructure">
 //     Copyright (c) AlbertPalencia. All rights reserved.
@@ -368,6 +368,7 @@ namespace SlabCode.Infrastructure.Repository
 		public virtual void Add(T t)
 		{
 			_context.Add(t);
+			SaveChanges();
 		}
 
 		/// <summary>
@@ -377,6 +378,7 @@ namespace SlabCode.Infrastructure.Repository
 		public virtual void Add(IEnumerable<T> t)
 		{
 			_context.AddRange(t);
+			SaveChanges();
 		}
 
 		/// <summary>
@@ -386,6 +388,7 @@ namespace SlabCode.Infrastructure.Repository
 		public virtual async Task AddAsync(T t)
 		{
 			await _context.AddAsync(t);
+			await _context.SaveChangesAsync();
 		}
 
 		/// <summary>
@@ -395,6 +398,7 @@ namespace SlabCode.Infrastructure.Repository
 		public virtual async Task AddAsync(IEnumerable<T> t)
 		{
 			await _context.AddRangeAsync(t);
+			await _context.SaveChangesAsync();
 		}
 
 		#endregion Add
@@ -409,6 +413,7 @@ namespace SlabCode.Infrastructure.Repository
 		{
 			_context.Entry(t).State = EntityState.Deleted;
 			_context.Remove(t);
+			SaveChanges();
 		}
 
 		/// <summary>
@@ -418,6 +423,7 @@ namespace SlabCode.Infrastructure.Repository
 		public virtual void Remove(IEnumerable<T> t)
 		{
 			_context.RemoveRange(t);
+			SaveChanges();
 		}
 
 		#endregion Remove
@@ -431,7 +437,7 @@ namespace SlabCode.Infrastructure.Repository
 		public virtual void Update(T t)
 		{
 			_context.Entry(t).State = EntityState.Modified;
-			_context.SaveChanges();
+			SaveChanges();
 		}
 
 		/// <summary>
@@ -441,8 +447,19 @@ namespace SlabCode.Infrastructure.Repository
 		public virtual void Update(IEnumerable<T> t)
 		{
 			_context.UpdateRange(t);
+			SaveChanges();
 		}
 
 		#endregion Update
+
+
+
+		/// <summary>
+		/// Saves the changes.
+		/// </summary>
+		private void SaveChanges()
+		{
+			_context.SaveChanges();
+		}
 	}
 }

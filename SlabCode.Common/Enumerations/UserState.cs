@@ -4,7 +4,7 @@
 // Created          : 05-06-2021
 //
 // Last Modified By : Alberto Palencia
-// Last Modified On : 05-06-2021
+// Last Modified On : 05-08-2021
 // ***********************************************************************
 // <copyright file="UserState.cs" company="SlabCode.Common">
 //     Copyright (c) AlbertPalencia. All rights reserved.
@@ -32,7 +32,7 @@ namespace SlabCode.Common.Enumerations
 		/// <summary>
 		/// The asistente
 		/// </summary>
-		private static UserState _inactive = new(2, "InHabilitado");
+		private static UserState _inactive = new(0, "InHabilitado");
 
 		public static UserState Active => _active;
 		public static UserState Inactive => _inactive;

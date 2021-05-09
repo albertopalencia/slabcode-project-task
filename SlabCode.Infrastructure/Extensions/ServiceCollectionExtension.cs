@@ -65,6 +65,7 @@ namespace SlabCode.Infrastructure.Extensions
 		public static IServiceCollection AddOptions(this IServiceCollection services, IConfiguration configuration)
 		{
 			services.Configure<PasswordOption>(options => configuration.GetSection("PasswordOption").Bind(options));
+			services.Configure<AuthenticationOption>(options => configuration.GetSection("Authentication").Bind(options));
 			return services;
 		}
 
