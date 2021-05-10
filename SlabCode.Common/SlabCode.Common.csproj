@@ -5,18 +5,40 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\UserMessage.Designer.cs">
+    <Compile Update="Resources\ProjectMessageResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>UserMessage.resx</DependentUpon>
+      <DependentUpon>ProjectMessageResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\TaskMessageResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TaskMessageResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\UserMessageResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UserMessageResource.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\UserMessage.resx">
+    <EmbeddedResource Update="Resources\ProjectMessageResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>UserMessage.Designer.cs</LastGenOutput>
+      <LastGenOutput>ProjectMessageResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\TaskMessageResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TaskMessageResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\UserMessageResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserMessageResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
 
 </Project>
