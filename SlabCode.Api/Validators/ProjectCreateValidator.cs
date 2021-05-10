@@ -33,12 +33,12 @@ namespace SlabCode.Api.Validators
 			RuleFor(n => n.Description).NotNull().NotEmpty()
 				.WithMessage("la descripcion es obligatorio");
 
-			RuleFor(x => x.DateInit).LessThan(DateTime.Now)
+			RuleFor(x => x.DateInit).GreaterThanOrEqualTo(DateTime.Now)
 				.WithMessage("debe ser posterior o igual al día presente");
 
 			RuleFor(x => x.DateEnd)
-				.LessThanOrEqualTo(x => x.DateInit)
-				.WithMessage("La fecha de finalizacion debe ser posterior o igual a la fechia de inicio");
+				.GreaterThanOrEqualTo(x => x.DateInit)
+				.WithMessage("La fecha de finalizacion debe ser posterior o igual a la fecha de inicio");
 		}
 	}
 }
