@@ -37,7 +37,7 @@ namespace SlabCode.Common.Utilities
 				var characters = words[randon.Next(wordLength)];
 				newPassword += characters;
 			}
-
+			 
 			return newPassword;
 		}
 	}

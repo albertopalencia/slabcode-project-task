@@ -61,11 +61,38 @@ namespace SlabCode.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cambio contraseña.
+        /// </summary>
+        public static string Cambio_Contraseña {
+            get {
+                return ResourceManager.GetString("Cambio Contraseña", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contraseña cambiada exitosamente.
+        /// </summary>
+        public static string ContrasenaCambiada {
+            get {
+                return ResourceManager.GetString("ContrasenaCambiada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to El usuario ha sido deshabilitado.
         /// </summary>
         public static string DeshabilitarUsuario {
             get {
                 return ResourceManager.GetString("DeshabilitarUsuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Señor(a) usuario su contraseña  ha sido generada: {a} ,  para cambiar la contraseña  necesitara de esta,  para realizar el cambio de contraseña.  .
+        /// </summary>
+        public static string EnviarCorreoCambioContrasena {
+            get {
+                return ResourceManager.GetString("EnviarCorreoCambioContrasena", resourceCulture);
             }
         }
         
@@ -88,6 +115,15 @@ namespace SlabCode.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Usuario se ha creado exitosamente.
+        /// </summary>
+        public static string UsuarioCreadoExitosamente {
+            get {
+                return ResourceManager.GetString("UsuarioCreadoExitosamente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to El usuario ya se encuentra deshabilitado .
         /// </summary>
         public static string UsuarioDeshabilitado {
@@ -97,11 +133,11 @@ namespace SlabCode.Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to El usuario no requiere cambiar contraseña.
+        ///   Looks up a localized string similar to El usuario requiere cambiar contraseña.
         /// </summary>
-        public static string UsuarioNoRequiereCambiarContrasena {
+        public static string UsuarioRequiereCambiarContrasena {
             get {
-                return ResourceManager.GetString("UsuarioNoRequiereCambiarContrasena", resourceCulture);
+                return ResourceManager.GetString("UsuarioRequiereCambiarContrasena", resourceCulture);
             }
         }
         

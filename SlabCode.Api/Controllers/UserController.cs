@@ -4,7 +4,7 @@
 // Created          : 05-08-2021
 //
 // Last Modified By : Alberto Palencia
-// Last Modified On : 05-08-2021
+// Last Modified On : 05-09-2021
 // ***********************************************************************
 // <copyright file="UserController.cs" company="SlabCode.Api">
 //     Copyright (c) AlbertPalencia. All rights reserved.
@@ -47,18 +47,19 @@ namespace SlabCode.Api.Controllers
 			_userService = userService;
 		}
 
+
 		/// <summary>
-		/// Creates the user.
+		/// Creates the specified user.
 		/// </summary>
 		/// <param name="user">The user.</param>
 		/// <returns>Task&lt;IActionResult&gt;.</returns>
-		[HttpPost("CreateUser")]
+		[HttpPost("Create")]
 		[ProducesResponseType((int)HttpStatusCode.Created, Type = typeof(ResponseGenericDto<bool>))]
 		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
-		public async Task<IActionResult> CreateUser(UserCreateDto user)
+		public async Task<IActionResult> Create(UserCreateDto user)
 		{
 			var userCreated = await _userService.Create(user);
-			return CreatedAtAction("CreateUser", userCreated);
+			return CreatedAtAction("Create", userCreated);
 		}
 
 		/// <summary>

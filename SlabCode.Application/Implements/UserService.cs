@@ -4,7 +4,7 @@
 // Created          : 05-07-2021
 //
 // Last Modified By : Alberto Palencia
-// Last Modified On : 05-08-2021
+// Last Modified On : 05-09-2021
 // ***********************************************************************
 // <copyright file="UserService.cs" company="SlabCode.Application">
 //     Copyright (c) AlbertPalencia. All rights reserved.
@@ -14,7 +14,6 @@
 using SlabCode.Application.Abstract;
 using SlabCode.Common.Enumerations;
 using SlabCode.Common.Resources;
-using SlabCode.Common.Utilities;
 using SlabCode.Domain.DTO;
 using SlabCode.Domain.DTO.User;
 using SlabCode.Domain.Entities;
@@ -22,6 +21,9 @@ using SlabCode.Infrastructure.Interfaces.Repositories;
 using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+using SlabCode.Application.DTO.Mail;
+using SlabCode.Infrastructure.Options;
 
 namespace SlabCode.Application.Implements
 {
@@ -42,15 +44,29 @@ namespace SlabCode.Application.Implements
 		/// </summary>
 		private readonly IUserRepository _repository;
 
+
+		/// <summary>
+		/// The mail service
+		/// </summary>
+		private readonly IMailService _mailService;
+
+
+		private readonly MailConfigurationOption _mailConfiguration;
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="UserService" /> class.
 		/// </summary>
 		/// <param name="repository">The repository.</param>
 		/// <param name="passwordService">The password service.</param>
-		public UserService(IUserRepository repository, IPasswordService passwordService)
+		/// <param name="mailService">The mail service.</param>
+		/// <param name="mailConfiguration"></param>
+		public UserService(IUserRepository repository, IPasswordService passwordService,
+			IMailService mailService, IOptions<MailConfigurationOption> mailConfiguration)
 		{
 			_repository = repository;
 			_passwordService = passwordService;
+			_mailService = mailService;
+			_mailConfiguration = mailConfiguration.Value;
 		}
 
 		/// <summary>
@@ -65,6 +81,8 @@ namespace SlabCode.Application.Implements
 			var userEntity = await FindByUserName(user.UserName);
 			if (userEntity is null) GenerateException(nameof(user));
 			UserIsActive(userEntity.Active);
+			if (userEntity.RequireChangePassword) GenerateException(UserMessage.UsuarioRequiereCambiarContrasena);
+
 			if (!_passwordService.ValidateEnCrypt(user.Password, userEntity.Password))
 			{
 				GenerateException(UserMessage.UsuarioContransenaInvalida);
@@ -83,9 +101,23 @@ namespace SlabCode.Application.Implements
 		{
 			var userCreate = await FindByUserName(user.UserName);
 			if (userCreate != null) GenerateException(UserMessage.UsuarioYaExiste);
-			userCreate.Password = _passwordService.Encrypt(PasswordUtilities.generateRandonPassword());
-			await _repository.AddAsync(user);
-			return new ResponseGenericDto<bool> { Success = true };
+			UserEntity userEntity = user;
+			await _repository.AddAsync(userEntity);
+			
+			var mailConfig =  new MailConfigDto()
+			{
+				Subject = UserMessage.Cambio_Contraseña,
+				From = _mailConfiguration.From,
+				To = user.Email,
+				Body = UserMessage.EnviarCorreoCambioContrasena.Replace("{a}", userEntity.Password),
+				User = _mailConfiguration.Username,
+				Password = _mailConfiguration.Password,
+				Port = _mailConfiguration.Port,
+				Host = _mailConfiguration.Host,
+				EnableSsl = _mailConfiguration.EnableSsl
+			};
+			await _mailService.SendMailAsync(mailConfig);
+			return new ResponseGenericDto<bool> { Success = true, Message = UserMessage.UsuarioCreadoExitosamente};
 		}
 
 		/// <summary>
@@ -98,7 +130,6 @@ namespace SlabCode.Application.Implements
 			return await FirstUserOrDefaultAsync(u => u.UserName == userName.ToLower());
 		}
 
-
 		/// <summary>
 		/// Updates the password.
 		/// </summary>
@@ -108,14 +139,18 @@ namespace SlabCode.Application.Implements
 		{
 			var userUpdate = await FindByUserName(user.UserName);
 			if (userUpdate is null) GenerateException(UserMessage.NoExisteUsuario);
-			if (userUpdate.RequireChangePassword) GenerateException(UserMessage.UsuarioNoRequiereCambiarContrasena);
-			
-			var validatePassword = _passwordService.ValidateEnCrypt(user.Password, userUpdate.Password);
+			if (!string.Equals(userUpdate.Password, user.Password))
+			{
+				GenerateException(UserMessage.UsuarioRequiereCambiarContrasena);
+			}
 
 			userUpdate.Password = _passwordService.Encrypt(user.NewPassword);
 			userUpdate.DateChangePassword = DateTime.Now;
 			userUpdate.RequireChangePassword = false;
-			return new ResponseGenericDto<bool>();
+			userUpdate.Active = UserState.Active;
+
+			_repository.Update(userUpdate);
+			return new ResponseGenericDto<bool> { Success = true, Message = UserMessage.ContrasenaCambiada };
 		}
 
 		/// <summary>

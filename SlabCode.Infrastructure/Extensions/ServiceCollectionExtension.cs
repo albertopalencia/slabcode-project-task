@@ -66,6 +66,7 @@ namespace SlabCode.Infrastructure.Extensions
 		{
 			services.Configure<PasswordOption>(options => configuration.GetSection("PasswordOption").Bind(options));
 			services.Configure<AuthenticationOption>(options => configuration.GetSection("Authentication").Bind(options));
+			services.Configure<MailConfigurationOption>(options => configuration.GetSection("MailConfiguration").Bind(options));
 			return services;
 		}
 

@@ -4,7 +4,7 @@
 // Created          : 03-25-2021
 //
 // Last Modified By : Alberto Palencia
-// Last Modified On : 05-07-2021
+// Last Modified On : 05-09-2021
 // ***********************************************************************
 // <copyright file="UserCreateDto.cs" company="SlabCode.Application">
 //     Copyright (c) AlbertPalencia. All rights reserved.
@@ -14,6 +14,7 @@
 
 using System;
 using SlabCode.Common.Enumerations;
+using SlabCode.Common.Utilities;
 using SlabCode.Domain.Entities;
 
 namespace SlabCode.Domain.DTO.User
@@ -24,6 +25,9 @@ namespace SlabCode.Domain.DTO.User
 
 	public class UserCreateDto
 	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="UserCreateDto" /> class.
+		/// </summary>
 		public UserCreateDto()
 		{
 			 
@@ -36,7 +40,6 @@ namespace SlabCode.Domain.DTO.User
 		/// <value>The name of the user.</value>
 		public string UserName { get; set; }
 
-		 
 		/// <summary>
 		/// Gets or sets the email.
 		/// </summary>
@@ -49,8 +52,9 @@ namespace SlabCode.Domain.DTO.User
 		/// <value>The role.</value>
 		private RoleType Role { get; }
 
+
 		/// <summary>
-		/// Performs an implicit conversion from <see cref="UserCreateDto"/> to <see cref="UserEntity"/>.
+		/// Performs an implicit conversion from <see cref="UserCreateDto" /> to <see cref="UserEntity" />.
 		/// </summary>
 		/// <param name="user">The user.</param>
 		/// <returns>The result of the conversion.</returns>
@@ -61,9 +65,9 @@ namespace SlabCode.Domain.DTO.User
 				UserName = user.UserName.ToLower(),
 				Email = user.Email,
 				Role = user.Role,
-				Active = UserState.Active,
-				DateChangePassword = DateTime.Now,
-				RequireChangePassword = true
+				Active = UserState.Inactive,
+				RequireChangePassword = true,
+				Password = PasswordUtilities.generateRandonPassword()
 			};
 		} 
 	}

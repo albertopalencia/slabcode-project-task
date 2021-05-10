@@ -134,6 +134,7 @@ namespace SlabCode.Api
 		{
 			services.AddSingleton<IPasswordService, PasswordService>();
 			services.AddTransient<IUserService, UserService>();
+			services.AddTransient<IMailService, MailService>();
 		}
 
 		/// <summary>

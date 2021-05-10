@@ -18,55 +18,52 @@ using SlabCode.Domain.Entities;
 
 namespace SlabCode.Infrastructure.DataAccess.Configurations
 {
-    /// <summary>
-    /// Class TaskConfiguration.
-    /// Implements the <see cref="TaskEntity" />
-    /// Implements the <see cref="Microsoft.EntityFrameworkCore.IEntityTypeConfiguration{SlabCode.Domain.Entities.TaskEntity}" />
-    /// </summary>
-    /// <seealso cref="Microsoft.EntityFrameworkCore.IEntityTypeConfiguration{SlabCode.Domain.Entities.TaskEntity}" />
-    /// <seealso cref="TaskEntity" />
-    public class TaskConfiguration : IEntityTypeConfiguration<TaskEntity>
-    {
-        /// <summary>
-        /// Configures the entity of type <typeparamref name="TEntity" />.
-        /// </summary>
-        /// <param name="builder">The builder to be used to configure the entity type.</param>
-        public void Configure(EntityTypeBuilder<TaskEntity> builder)
-        {
-            builder.ToTable("Tarea");
+	/// <summary>
+	/// Class TaskConfiguration.
+	/// Implements the <see cref="TaskEntity" />
+	/// Implements the <see cref="Microsoft.EntityFrameworkCore.IEntityTypeConfiguration{SlabCode.Domain.Entities.TaskEntity}" />
+	/// </summary>
+	/// <seealso cref="Microsoft.EntityFrameworkCore.IEntityTypeConfiguration{SlabCode.Domain.Entities.TaskEntity}" />
+	/// <seealso cref="TaskEntity" />
+	public class TaskConfiguration : IEntityTypeConfiguration<TaskEntity>
+	{
+		/// <summary>
+		/// Configures the entity of type <typeparamref name="TEntity" />.
+		/// </summary>
+		/// <param name="builder">The builder to be used to configure the entity type.</param>
+		public void Configure(EntityTypeBuilder<TaskEntity> builder)
+		{
+			builder.ToTable("Tarea");
 
-            builder.HasKey(i => i.Id);
-            builder.Property(i => i.Id)
-                   .HasColumnName("IdTarea");
+			builder.HasKey(i => i.Id);
+			builder.Property(i => i.Id)
+				   .HasColumnName("IdTarea");
 
-            builder.Property(i => i.IdProyect)
-                  .HasColumnName("IdProyecto");
+			builder.Property(i => i.IdProyect)
+				  .HasColumnName("IdProyecto");
 
-            builder.Property(i => i.TaskName)
-                .HasColumnName("Nombre")
-                .HasColumnType("nvarchar(350)")
-                .IsRequired()
-                .HasMaxLength(350);
+			builder.Property(i => i.TaskName)
+				.HasColumnName("Nombre")
+				.HasColumnType("nvarchar(350)")
+				.IsRequired()
+				.HasMaxLength(350);
 
-         
-            builder.Property(e => e.TaskState)
-                .HasColumnName("Estado")
-                .IsRequired()
-                .HasConversion(
-                    t => t.Id,
-                    t => Enumeration.FromValue<TaskState>(t)); 
+			builder.Property(e => e.TaskState)
+				.HasColumnName("Estado")
+				.IsRequired()
+				.HasConversion(
+					t => t.Id,
+					t => Enumeration.FromValue<TaskState>(t));
 
+			builder.Property(i => i.Description)
+					   .HasColumnName("Descripcion")
+					   .HasColumnType("nvarchar(600)")
+					   .IsRequired()
+					   .HasMaxLength(600);
 
-        builder.Property(i => i.Description)
-                   .HasColumnName("Descripcion")
-                   .HasColumnType("nvarchar(600)")
-                   .IsRequired()
-                   .HasMaxLength(600);
-
-            builder.Property(i => i.DateExecution)
-                   .HasColumnName("DateExecution")
-                   .HasColumnType("date");
-            
-        }
-    }
+			builder.Property(i => i.DateExecution)
+				   .HasColumnName("DateExecution")
+				   .HasColumnType("date");
+		}
+	}
 }

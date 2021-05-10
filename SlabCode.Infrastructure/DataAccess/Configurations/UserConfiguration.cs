@@ -74,14 +74,11 @@ namespace SlabCode.Infrastructure.DataAccess.Configurations
 
 
 			builder.Property(e => e.RequireChangePassword)
-				.HasColumnName("CambioContrasena")
-				.IsRequired()
-				.IsUnicode(false);
+				.HasColumnName("CambioContrasena");
+				
 
 
-			builder.Property(e => e.DateChangePassword)
-				.HasColumnName("FechaCambioContrasena")
-				.HasColumnType("date");
+			builder.Property(e => e.DateChangePassword).HasColumnName("FechaCambioContrasena");
 
 		}
 	}

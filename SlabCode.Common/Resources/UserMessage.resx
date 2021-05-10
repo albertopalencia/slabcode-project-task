@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Cambio Contraseña" xml:space="preserve">
+    <value>Cambio contraseña</value>
+  </data>
+  <data name="ContrasenaCambiada" xml:space="preserve">
+    <value>Contraseña cambiada exitosamente</value>
+  </data>
   <data name="DeshabilitarUsuario" xml:space="preserve">
     <value>El usuario ha sido deshabilitado</value>
+  </data>
+  <data name="EnviarCorreoCambioContrasena" xml:space="preserve">
+    <value>Señor(a) usuario su contraseña  ha sido generada: {a} ,  para cambiar la contraseña  necesitara de esta,  para realizar el cambio de contraseña.  </value>
   </data>
   <data name="NoExisteUsuario" xml:space="preserve">
     <value>El usuario no existe </value>
@@ -126,11 +135,14 @@
   <data name="UsuarioContransenaInvalida" xml:space="preserve">
     <value>El usuario o contrasena es invalida </value>
   </data>
+  <data name="UsuarioCreadoExitosamente" xml:space="preserve">
+    <value>Usuario se ha creado exitosamente</value>
+  </data>
   <data name="UsuarioDeshabilitado" xml:space="preserve">
     <value>El usuario ya se encuentra deshabilitado </value>
   </data>
-  <data name="UsuarioNoRequiereCambiarContrasena" xml:space="preserve">
-    <value>El usuario no requiere cambiar contraseña</value>
+  <data name="UsuarioRequiereCambiarContrasena" xml:space="preserve">
+    <value>El usuario requiere cambiar contraseña</value>
   </data>
   <data name="UsuarioYaExiste" xml:space="preserve">
     <value>El usuario ya existe</value>

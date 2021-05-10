@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <ProjectGuid>{c51ed3d3-1d7a-4e89-96b6-c77b42317af2}</ProjectGuid>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SlabCode.Common\SlabCode.Common.csproj" />
+  </ItemGroup>
+
+</Project>

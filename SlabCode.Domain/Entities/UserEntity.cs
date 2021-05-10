@@ -53,11 +53,11 @@ namespace SlabCode.Domain.Entities
         /// Gets or sets a value indicating whether [require change password].
         /// </summary>
         /// <value><c>true</c> if [require change password]; otherwise, <c>false</c>.</value>
-        public bool RequireChangePassword { get; set; }
+        public bool  RequireChangePassword { get; set; }
         /// <summary>
         /// Gets or sets the date change password.
         /// </summary>
         /// <value>The date change password.</value>
-        public DateTime DateChangePassword { get; set; }
+        public DateTime?  DateChangePassword { get; set; }
     }
 }
