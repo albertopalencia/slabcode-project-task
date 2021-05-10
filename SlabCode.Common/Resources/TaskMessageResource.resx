@@ -117,37 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Cambio Contraseña" xml:space="preserve">
-    <value>Cambio contraseña</value>
+  <data name="MensajeFechaFueraDelRango" xml:space="preserve">
+    <value>la fecha ejecucion debe estar en el rango de fechas de inicio y final del
+proyecto</value>
   </data>
-  <data name="ContrasenaCambiada" xml:space="preserve">
-    <value>Contraseña cambiada exitosamente</value>
+  <data name="MensajeTareaActualizada" xml:space="preserve">
+    <value>Tarea actualizada exitosamente</value>
   </data>
-  <data name="DeshabilitarUsuario" xml:space="preserve">
-    <value>El usuario ha sido deshabilitado</value>
+  <data name="MensajeTareaCompletada" xml:space="preserve">
+    <value>Tarea completada exitosamente</value>
   </data>
-  <data name="EnviarCorreoCambioContrasena" xml:space="preserve">
-    <value>Señor(a) usuario su contraseña  ha sido generada: {a} ,  para cambiar la contraseña necesitara ingresar al siguiente link https://localhost:44340/api/User/UpdatePassword ,  el consumo de este api es web.</value>
+  <data name="MensajeTareaCreada" xml:space="preserve">
+    <value>Tarea creada exitosamente</value>
   </data>
-  <data name="NoExisteUsuario" xml:space="preserve">
-    <value>El usuario no existe </value>
+  <data name="MensajeTareaEliminada" xml:space="preserve">
+    <value>Tarea eliminada exitosamente</value>
   </data>
-  <data name="UsuarioContransenaInvalida" xml:space="preserve">
-    <value>El usuario o contrasena es invalida </value>
-  </data>
-  <data name="UsuarioCreadoExitosamente" xml:space="preserve">
-    <value>Usuario se ha creado exitosamente</value>
-  </data>
-  <data name="UsuarioDeshabilitado" xml:space="preserve">
-    <value>El usuario ya se encuentra deshabilitado </value>
-  </data>
-  <data name="UsuarioHabilitado" xml:space="preserve">
-    <value>El usuario ha sido habilitado</value>
-  </data>
-  <data name="UsuarioRequiereCambiarContrasena" xml:space="preserve">
-    <value>El usuario requiere cambiar contraseña</value>
-  </data>
-  <data name="UsuarioYaExiste" xml:space="preserve">
-    <value>El usuario ya existe</value>
+  <data name="MensajeTareaNoExiste" xml:space="preserve">
+    <value>No existe una tarea para ese id</value>
   </data>
 </root>

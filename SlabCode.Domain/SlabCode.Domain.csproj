@@ -9,4 +9,8 @@
     <ProjectReference Include="..\SlabCode.Common\SlabCode.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTO\Project\" />
+  </ItemGroup>
+
 </Project>

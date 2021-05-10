@@ -24,7 +24,7 @@ namespace SlabCode.Infrastructure.Interfaces.Repositories
 	/// <seealso cref="SlabCode.Infrastructure.Interfaces.ICreateRepository{SlabCode.Domain.Entities.TaskEntity}" />
 	/// <seealso cref="SlabCode.Infrastructure.Interfaces.IUpdateRepository{SlabCode.Domain.Entities.TaskEntity}" />
 	/// <seealso cref="SlabCode.Infrastructure.Interfaces.IRemoveRepository{SlabCode.Domain.Entities.TaskEntity}" />
-	public interface ITaskRepository: ICreateRepository<TaskEntity>, IUpdateRepository<TaskEntity>, IRemoveRepository<TaskEntity>
+	public interface ITaskRepository: IReadRepository<TaskEntity>, ICreateRepository<TaskEntity>, IUpdateRepository<TaskEntity>, IRemoveRepository<TaskEntity>
 	{
 		
 	}

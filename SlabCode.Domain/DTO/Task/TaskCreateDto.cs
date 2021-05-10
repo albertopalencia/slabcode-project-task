@@ -12,56 +12,57 @@
 // <summary></summary>
 // ***********************************************************************
 
-using SlabCode.Common.Enumerations;
-using SlabCode.Domain.DTO.Task;
-using SlabCode.Domain.Entities;
 using System;
+using SlabCode.Common.Enumerations;
+using SlabCode.Domain.Entities;
 
-namespace SlabCode.Domain.DTO.Project
+namespace SlabCode.Domain.DTO.Task
 {
 	/// <summary>
 	/// Class ProjectCreateDto.
 	/// </summary>
-	public class ProjectCreateDto
+	public class TaskCreateDto
 	{
 		/// <summary>
-		/// Gets or sets the name of the project.
+		/// Gets or sets the name of the task.
 		/// </summary>
-		/// <value>The name of the project.</value>
-		public string ProjectName { get; set; }
-
+		/// <value>The name of the task.</value>
+		public string TaskName { get; set; }
 		/// <summary>
 		/// Gets or sets the description.
 		/// </summary>
 		/// <value>The description.</value>
 		public string Description { get; set; }
+		/// <summary>
+		/// Gets or sets the date execution.
+		/// </summary>
+		/// <value>The date execution.</value>
+		public DateTime DateExecution { get; set; }
+		/// <summary>
+		/// Gets or sets the identifier proyect.
+		/// </summary>
+		/// <value>The identifier proyect.</value>
+		public int ProjectId { get; set; }
+		/// <summary>
+		/// Gets or sets the state of the task.
+		/// </summary>
+		/// <value>The state of the task.</value>
+		public TaskState TaskState { get; set; }
 
 		/// <summary>
-		/// Gets or sets the date initialize.
+		/// Performs an implicit conversion from <see cref="TaskCreateDto"/> to <see cref="TaskEntity"/>.
 		/// </summary>
-		/// <value>The date initialize.</value>
-		public DateTime DateInit { get; set; }
-
-		/// <summary>
-		/// Gets or sets the date ended.
-		/// </summary>
-		/// <value>The date ended.</value>
-		public DateTime? DateEnd { get; set; }
-
-		/// <summary>
-		/// Performs an implicit conversion from <see cref="TaskCreateDto"/> to <see cref="ProjectEntity"/>.
-		/// </summary>
-		/// <param name="project">The project.</param>
+		/// <param name="task">The project.</param>
 		/// <returns>The result of the conversion.</returns>
-		public static implicit operator ProjectEntity(ProjectCreateDto project)
+		public static implicit operator TaskEntity(TaskCreateDto task)
 		{
 			return new()
 			{
-				ProjectName = project.ProjectName,
-				Description = project.Description,
-				DateInit = project.DateInit,
-				DateEnd = project.DateEnd ?? DateTime.Now.AddDays(1),
-				State = ProjectState.InProgress
+				ProjectId = task.ProjectId,
+				TaskName = task. TaskName,
+				Description = task.Description,
+				DateExecution = task.DateExecution,
+				TaskState = TaskState.InProgress
 			};
 		}
 	}

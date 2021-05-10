@@ -88,7 +88,7 @@ namespace SlabCode.Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Señor(a) usuario su contraseña  ha sido generada: {a} ,  para cambiar la contraseña  necesitara de esta,  para realizar el cambio de contraseña.  .
+        ///   Looks up a localized string similar to Señor(a) usuario su contraseña  ha sido generada: {a} ,  para cambiar la contraseña necesitara ingresar al siguiente link https://localhost:44340/api/User/UpdatePassword ,  el consumo de este api es web..
         /// </summary>
         public static string EnviarCorreoCambioContrasena {
             get {

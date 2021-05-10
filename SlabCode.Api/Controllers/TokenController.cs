@@ -12,20 +12,18 @@
 // <summary></summary>
 // ***********************************************************************
 
-using AutoMapper.Configuration;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SlabCode.Application.Abstract;
-using SlabCode.Domain.DTO;
 using SlabCode.Domain.DTO.User;
+using SlabCode.Infrastructure.Options;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
-using SlabCode.Infrastructure.Options;
 
 namespace SlabCode.Api.Controllers
 {
@@ -70,10 +68,9 @@ namespace SlabCode.Api.Controllers
 		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
 		public async Task<IActionResult> Authentication(UserLoginDto user)
 		{
-			var result = await _userService.ValidateUser(user); 
+			var result = await _userService.ValidateUser(user);
 			return Ok(GenerateToken(result));
 		}
-
 
 		/// <summary>
 		/// Generates the token.
@@ -86,7 +83,6 @@ namespace SlabCode.Api.Controllers
 			var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
 			var header = new JwtHeader(signingCredentials);
 
-			 
 			var claims = new[]
 			{
 				new Claim(ClaimTypes.Name, user.UserName),
@@ -94,7 +90,6 @@ namespace SlabCode.Api.Controllers
 				new Claim(ClaimTypes.Role, user.RolType),
 			};
 
-		 
 			var payload = new JwtPayload
 			(
 				_authenticationOption.Issuer,

@@ -19,6 +19,7 @@ using SlabCode.Domain.DTO.Project;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SlabCode.Api.Controllers
 {
@@ -27,7 +28,7 @@ namespace SlabCode.Api.Controllers
 	/// Implements the <see cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
 	/// </summary>
 	/// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
-	//[Authorize(Roles = "Operador")]
+	[Authorize(Roles = "Administrador,Operador")]
 	[Produces("application/json")]
 	[Route("api/[controller]")]
 	[ApiController]
@@ -85,15 +86,32 @@ namespace SlabCode.Api.Controllers
 		[HttpPost("Create")]
 		[ProducesResponseType((int)HttpStatusCode.Created, Type = typeof(ResponseGenericDto<bool>))]
 		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
-		public async Task<IActionResult> Create(ProjectCreateDto project)
+		public async Task<IActionResult> Create([FromBody] ProjectCreateDto project)
 		{
 			var projectCreate = await _projectService.CreateProject(project);
 			return CreatedAtAction("Create", projectCreate);
 		}
 
 
+
 		/// <summary>
-		/// Creates the specified project.
+		/// Updates the project.
+		/// </summary>
+		/// <param name="id">The identifier.</param>
+		/// <param name="project">The project.</param>
+		/// <returns>Task&lt;IActionResult&gt;.</returns>
+		[HttpPost("UpdateProject:{id}")]
+		[ProducesResponseType((int)HttpStatusCode.Created, Type = typeof(ResponseGenericDto<bool>))]
+		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
+		public async Task<IActionResult> UpdateProject(int id, [FromBody] ProjectUpdateDto project)
+		{
+			var response = await _projectService.UpdateProject(id, project);
+			return Ok(response);
+		}
+
+
+		/// <summary>
+		/// Projects the complete.
 		/// </summary>
 		/// <param name="id">The identifier.</param>
 		/// <returns>Task&lt;IActionResult&gt;.</returns>
@@ -106,8 +124,9 @@ namespace SlabCode.Api.Controllers
 			return Ok(projectComplete);
 		}
 
+
 		/// <summary>
-		/// Creates the specified project.
+		/// Removes the specified identifier.
 		/// </summary>
 		/// <param name="id">The identifier.</param>
 		/// <returns>Task&lt;IActionResult&gt;.</returns>

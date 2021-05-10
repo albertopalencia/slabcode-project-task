@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SlabCode.Domain.DTO.Task;
 
 namespace SlabCode.Application.Implements
 {
@@ -82,6 +83,7 @@ namespace SlabCode.Application.Implements
 			var projectList = projects.Select<ProjectEntity, ProjectListDto>(s => s).ToList();
 			return new ResponseGenericDto<List<ProjectListDto>> { Success = true, Result = projectList };
 		}
+
 
 		/// <summary>
 		/// Creates the project.
