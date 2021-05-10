@@ -56,7 +56,7 @@ namespace SlabCode.Api.Filters
 
 				if (errorList.Any())
 				{
-					throw new ValidationException((IEnumerable<FluentValidation.Results.ValidationFailure>)errorList.AsEnumerable());
+					throw new ValidationException(string.Join(",",errorList));
 				}
 			}
 

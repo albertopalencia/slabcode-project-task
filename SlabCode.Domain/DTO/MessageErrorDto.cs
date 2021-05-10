@@ -11,6 +11,9 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
+using System.Text.Json;
+
 namespace SlabCode.Domain.DTO
 {
 	/// <summary>
@@ -28,5 +31,11 @@ namespace SlabCode.Domain.DTO
 		/// </summary>
 		/// <value>The property.</value>
 		public string Property { get; set; }
+
+		public override string ToString()
+		{
+			return JsonSerializer.Serialize(this);
+
+		}
 	}
 }
