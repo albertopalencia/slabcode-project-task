@@ -82,7 +82,7 @@ namespace SlabCode.Api.Controllers
 		/// <param name="id">The identifier.</param>
 		/// <param name="project">The project.</param>
 		/// <returns>Task&lt;IActionResult&gt;.</returns>
-		[HttpPost("UpdateTask:{id}")]
+		[HttpPut("UpdateTask:{id}")]
 		[ProducesResponseType((int)HttpStatusCode.Created, Type = typeof(ResponseGenericDto<bool>))]
 		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
 		public async Task<IActionResult> UpdateTask(int id, [FromBody] TaskUpdateDto project)
