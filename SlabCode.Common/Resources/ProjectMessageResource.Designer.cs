@@ -22,14 +22,14 @@ namespace SlabCode.Common.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class UserMessage {
+    public class ProjectMessageResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal UserMessage() {
+        internal ProjectMessageResource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace SlabCode.Common.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SlabCode.Common.Resources.UserMessage", typeof(UserMessage).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SlabCode.Common.Resources.ProjectMessageResource", typeof(ProjectMessageResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,92 +61,84 @@ namespace SlabCode.Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cambio contraseña.
+        ///   Looks up a localized string similar to Se eliminaron {0} proyectos.
         /// </summary>
-        public static string Cambio_Contraseña {
+        public static string MensajeEliminarProyecto {
             get {
-                return ResourceManager.GetString("Cambio Contraseña", resourceCulture);
+                return ResourceManager.GetString("MensajeEliminarProyecto", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contraseña cambiada exitosamente.
+        ///   Looks up a localized string similar to No se puede modificar la fecha de ejecucion porque existen tareas con fechas de
+        ///ejecución posteriores a la nueva fecha de finalización.
         /// </summary>
-        public static string ContrasenaCambiada {
+        public static string MensajeFechaEjecucion {
             get {
-                return ResourceManager.GetString("ContrasenaCambiada", resourceCulture);
+                return ResourceManager.GetString("MensajeFechaEjecucion", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to El usuario ha sido deshabilitado.
+        ///   Looks up a localized string similar to El proyecto no se encontro o ya se encuentra finalizado.
         /// </summary>
-        public static string DeshabilitarUsuario {
+        public static string MensajeProyectFinalizadoNoEncontrado {
             get {
-                return ResourceManager.GetString("DeshabilitarUsuario", resourceCulture);
+                return ResourceManager.GetString("MensajeProyectFinalizadoNoEncontrado", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Señor(a) usuario su contraseña  ha sido generada: {a} ,  para cambiar la contraseña  necesitara de esta,  para realizar el cambio de contraseña.  .
+        ///   Looks up a localized string similar to Proyecto actualizado correctamente.
         /// </summary>
-        public static string EnviarCorreoCambioContrasena {
+        public static string MensajeProyectoActualizado {
             get {
-                return ResourceManager.GetString("EnviarCorreoCambioContrasena", resourceCulture);
+                return ResourceManager.GetString("MensajeProyectoActualizado", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to El usuario no existe .
+        ///   Looks up a localized string similar to El proyecto se ha creado exitosamente.
         /// </summary>
-        public static string NoExisteUsuario {
+        public static string MensajeProyectoCreado {
             get {
-                return ResourceManager.GetString("NoExisteUsuario", resourceCulture);
+                return ResourceManager.GetString("MensajeProyectoCreado", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to El usuario o contrasena es invalida .
+        ///   Looks up a localized string similar to Su proyecto ha finalizado con exito.
         /// </summary>
-        public static string UsuarioContransenaInvalida {
+        public static string MensajeProyectoFinalizado {
             get {
-                return ResourceManager.GetString("UsuarioContransenaInvalida", resourceCulture);
+                return ResourceManager.GetString("MensajeProyectoFinalizado", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usuario se ha creado exitosamente.
+        ///   Looks up a localized string similar to Notificación Proyecto Finalizado.
         /// </summary>
-        public static string UsuarioCreadoExitosamente {
+        public static string MensajeProyectoFinalizadoTitulo {
             get {
-                return ResourceManager.GetString("UsuarioCreadoExitosamente", resourceCulture);
+                return ResourceManager.GetString("MensajeProyectoFinalizadoTitulo", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to El usuario ya se encuentra deshabilitado .
+        ///   Looks up a localized string similar to El proyecto no existe.
         /// </summary>
-        public static string UsuarioDeshabilitado {
+        public static string MensajeProyectoNoExiste {
             get {
-                return ResourceManager.GetString("UsuarioDeshabilitado", resourceCulture);
+                return ResourceManager.GetString("MensajeProyectoNoExiste", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to El usuario requiere cambiar contraseña.
+        ///   Looks up a localized string similar to No se puede completar el proyecto, todavia tiene tareas pendientes por realizar..
         /// </summary>
-        public static string UsuarioRequiereCambiarContrasena {
+        public static string MensajeTareasPorRealizar {
             get {
-                return ResourceManager.GetString("UsuarioRequiereCambiarContrasena", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to El usuario ya existe.
-        /// </summary>
-        public static string UsuarioYaExiste {
-            get {
-                return ResourceManager.GetString("UsuarioYaExiste", resourceCulture);
+                return ResourceManager.GetString("MensajeTareasPorRealizar", resourceCulture);
             }
         }
     }

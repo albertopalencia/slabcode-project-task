@@ -47,7 +47,7 @@ namespace SlabCode.Infrastructure.DataAccess
 		/// Gets or sets the proyects.
 		/// </summary>
 		/// <value>The proyects.</value>
-		public virtual DbSet<ProyectEntity> Proyects { get; set; }
+		public virtual DbSet<ProjectEntity> Projects { get; set; }
 		/// <summary>
 		/// Gets or sets the tasks.
 		/// </summary>

@@ -36,7 +36,7 @@ namespace SlabCode.Common.Enumerations
 		private static   RoleType _operator = new(2, "Operador");
 
 		public static RoleType Operator => _operator;
-		public static RoleType Administrator => _operator;
+		public static RoleType Administrator => _administrator;
 		
 
 		

@@ -133,8 +133,10 @@ namespace SlabCode.Api
 		public void AddApplicationService(IServiceCollection services)
 		{
 			services.AddSingleton<IPasswordService, PasswordService>();
-			services.AddTransient<IUserService, UserService>();
 			services.AddTransient<IMailService, MailService>();
+			services.AddTransient<IUserService, UserService>();
+			services.AddTransient<IProjectService, ProjectService>();
+			services.AddTransient<ITaskService, TaskService>();
 		}
 
 		/// <summary>

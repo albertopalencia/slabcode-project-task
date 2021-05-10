@@ -117,34 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Cambio Contraseña" xml:space="preserve">
-    <value>Cambio contraseña</value>
+  <data name="MensajeEliminarProyecto" xml:space="preserve">
+    <value>Se eliminaron {0} proyectos</value>
   </data>
-  <data name="ContrasenaCambiada" xml:space="preserve">
-    <value>Contraseña cambiada exitosamente</value>
+  <data name="MensajeFechaEjecucion" xml:space="preserve">
+    <value>No se puede modificar la fecha de ejecucion porque existen tareas con fechas de
+ejecución posteriores a la nueva fecha de finalización</value>
   </data>
-  <data name="DeshabilitarUsuario" xml:space="preserve">
-    <value>El usuario ha sido deshabilitado</value>
+  <data name="MensajeProyectFinalizadoNoEncontrado" xml:space="preserve">
+    <value>El proyecto no se encontro o ya se encuentra finalizado</value>
   </data>
-  <data name="EnviarCorreoCambioContrasena" xml:space="preserve">
-    <value>Señor(a) usuario su contraseña  ha sido generada: {a} ,  para cambiar la contraseña  necesitara de esta,  para realizar el cambio de contraseña.  </value>
+  <data name="MensajeProyectoActualizado" xml:space="preserve">
+    <value>Proyecto actualizado correctamente</value>
   </data>
-  <data name="NoExisteUsuario" xml:space="preserve">
-    <value>El usuario no existe </value>
+  <data name="MensajeProyectoCreado" xml:space="preserve">
+    <value>El proyecto se ha creado exitosamente</value>
   </data>
-  <data name="UsuarioContransenaInvalida" xml:space="preserve">
-    <value>El usuario o contrasena es invalida </value>
+  <data name="MensajeProyectoFinalizado" xml:space="preserve">
+    <value>Su proyecto ha finalizado con exito</value>
   </data>
-  <data name="UsuarioCreadoExitosamente" xml:space="preserve">
-    <value>Usuario se ha creado exitosamente</value>
+  <data name="MensajeProyectoFinalizadoTitulo" xml:space="preserve">
+    <value>Notificación Proyecto Finalizado</value>
   </data>
-  <data name="UsuarioDeshabilitado" xml:space="preserve">
-    <value>El usuario ya se encuentra deshabilitado </value>
+  <data name="MensajeProyectoNoExiste" xml:space="preserve">
+    <value>El proyecto no existe</value>
   </data>
-  <data name="UsuarioRequiereCambiarContrasena" xml:space="preserve">
-    <value>El usuario requiere cambiar contraseña</value>
-  </data>
-  <data name="UsuarioYaExiste" xml:space="preserve">
-    <value>El usuario ya existe</value>
+  <data name="MensajeTareasPorRealizar" xml:space="preserve">
+    <value>No se puede completar el proyecto, todavia tiene tareas pendientes por realizar.</value>
   </data>
 </root>

@@ -39,7 +39,7 @@ namespace SlabCode.Infrastructure.DataAccess.Configurations
 			builder.Property(i => i.Id)
 				   .HasColumnName("IdTarea");
 
-			builder.Property(i => i.IdProyect)
+			builder.Property(i => i.ProjectId)
 				  .HasColumnName("IdProyecto");
 
 			builder.Property(i => i.TaskName)
@@ -62,7 +62,7 @@ namespace SlabCode.Infrastructure.DataAccess.Configurations
 					   .HasMaxLength(600);
 
 			builder.Property(i => i.DateExecution)
-				   .HasColumnName("DateExecution")
+				   .HasColumnName("FechaEjecucion")
 				   .HasColumnType("date");
 		}
 	}

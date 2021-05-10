@@ -79,6 +79,8 @@ namespace SlabCode.Infrastructure.Extensions
 		{
 		 
 			services.AddTransient<IUserRepository, UserRepository>();
+			services.AddTransient<ITaskRepository, TaskRepository>();
+			services.AddTransient<IProjectRepository, ProjectRepository>();
 
 			return services;
 		}

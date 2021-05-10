@@ -4,7 +4,7 @@
 // Created          : 05-07-2021
 //
 // Last Modified By : Alberto Palencia
-// Last Modified On : 05-08-2021
+// Last Modified On : 05-10-2021
 // ***********************************************************************
 // <copyright file="IUserService.cs" company="SlabCode.Application">
 //     Copyright (c) AlbertPalencia. All rights reserved.
@@ -48,5 +48,14 @@ namespace SlabCode.Application.Abstract
 		/// <param name="userInactivate">The userInactivate.</param>
 		/// <returns>Task&lt;ResponseGenericDto&lt;System.Boolean&gt;&gt;.</returns>
 		Task<ResponseGenericDto<bool>> UserInactivate(UserInactivateDto userInactivate);
+
+
+		/// <summary>
+		/// Notifiers the user administrador.
+		/// </summary>
+		/// <param name="body">The body.</param>
+		/// <param name="subject">The subject.</param>
+		/// <returns>Task.</returns>
+		Task NotifierUserAdministrador(string body, string subject);
 	}
 }

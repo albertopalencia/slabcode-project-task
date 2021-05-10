@@ -4,26 +4,26 @@
 // Created          : 05-07-2021
 //
 // Last Modified By : Alberto Palencia
-// Last Modified On : 05-09-2021
+// Last Modified On : 05-10-2021
 // ***********************************************************************
 // <copyright file="UserService.cs" company="SlabCode.Application">
 //     Copyright (c) AlbertPalencia. All rights reserved.
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using Microsoft.Extensions.Options;
 using SlabCode.Application.Abstract;
+using SlabCode.Application.DTO.Mail;
 using SlabCode.Common.Enumerations;
 using SlabCode.Common.Resources;
 using SlabCode.Domain.DTO;
 using SlabCode.Domain.DTO.User;
 using SlabCode.Domain.Entities;
 using SlabCode.Infrastructure.Interfaces.Repositories;
+using SlabCode.Infrastructure.Options;
 using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
-using SlabCode.Application.DTO.Mail;
-using SlabCode.Infrastructure.Options;
 
 namespace SlabCode.Application.Implements
 {
@@ -44,13 +44,14 @@ namespace SlabCode.Application.Implements
 		/// </summary>
 		private readonly IUserRepository _repository;
 
-
 		/// <summary>
 		/// The mail service
 		/// </summary>
 		private readonly IMailService _mailService;
 
-
+		/// <summary>
+		/// The mail configuration
+		/// </summary>
 		private readonly MailConfigurationOption _mailConfiguration;
 
 		/// <summary>
@@ -59,7 +60,7 @@ namespace SlabCode.Application.Implements
 		/// <param name="repository">The repository.</param>
 		/// <param name="passwordService">The password service.</param>
 		/// <param name="mailService">The mail service.</param>
-		/// <param name="mailConfiguration"></param>
+		/// <param name="mailConfiguration">The mail configuration.</param>
 		public UserService(IUserRepository repository, IPasswordService passwordService,
 			IMailService mailService, IOptions<MailConfigurationOption> mailConfiguration)
 		{
@@ -81,11 +82,11 @@ namespace SlabCode.Application.Implements
 			var userEntity = await FindByUserName(user.UserName);
 			if (userEntity is null) GenerateException(nameof(user));
 			UserIsActive(userEntity.Active);
-			if (userEntity.RequireChangePassword) GenerateException(UserMessage.UsuarioRequiereCambiarContrasena);
+			if (userEntity.RequireChangePassword) GenerateException(UserMessageResource.UsuarioRequiereCambiarContrasena);
 
 			if (!_passwordService.ValidateEnCrypt(user.Password, userEntity.Password))
 			{
-				GenerateException(UserMessage.UsuarioContransenaInvalida);
+				GenerateException(UserMessageResource.UsuarioContransenaInvalida);
 			}
 
 			return userEntity;
@@ -100,24 +101,14 @@ namespace SlabCode.Application.Implements
 		public async Task<ResponseGenericDto<bool>> Create(UserCreateDto user)
 		{
 			var userCreate = await FindByUserName(user.UserName);
-			if (userCreate != null) GenerateException(UserMessage.UsuarioYaExiste);
+			if (userCreate != null) GenerateException(UserMessageResource.UsuarioYaExiste);
 			UserEntity userEntity = user;
 			await _repository.AddAsync(userEntity);
-			
-			var mailConfig =  new MailConfigDto()
-			{
-				Subject = UserMessage.Cambio_Contraseña,
-				From = _mailConfiguration.From,
-				To = user.Email,
-				Body = UserMessage.EnviarCorreoCambioContrasena.Replace("{a}", userEntity.Password),
-				User = _mailConfiguration.Username,
-				Password = _mailConfiguration.Password,
-				Port = _mailConfiguration.Port,
-				Host = _mailConfiguration.Host,
-				EnableSsl = _mailConfiguration.EnableSsl
-			};
-			await _mailService.SendMailAsync(mailConfig);
-			return new ResponseGenericDto<bool> { Success = true, Message = UserMessage.UsuarioCreadoExitosamente};
+
+			var body = UserMessageResource.EnviarCorreoCambioContrasena.Replace("{a}", userEntity.Password);
+			await SendUserEmail(user.Email, body, UserMessageResource.Cambio_Contraseña);
+
+			return new ResponseGenericDto<bool> { Success = true, Message = UserMessageResource.UsuarioCreadoExitosamente };
 		}
 
 		/// <summary>
@@ -138,10 +129,10 @@ namespace SlabCode.Application.Implements
 		public async Task<ResponseGenericDto<bool>> UpdatePassword(UserUpdatePasswordDto user)
 		{
 			var userUpdate = await FindByUserName(user.UserName);
-			if (userUpdate is null) GenerateException(UserMessage.NoExisteUsuario);
+			if (userUpdate is null) GenerateException(UserMessageResource.NoExisteUsuario);
 			if (!string.Equals(userUpdate.Password, user.Password))
 			{
-				GenerateException(UserMessage.UsuarioRequiereCambiarContrasena);
+				GenerateException(UserMessageResource.UsuarioRequiereCambiarContrasena);
 			}
 
 			userUpdate.Password = _passwordService.Encrypt(user.NewPassword);
@@ -150,7 +141,7 @@ namespace SlabCode.Application.Implements
 			userUpdate.Active = UserState.Active;
 
 			_repository.Update(userUpdate);
-			return new ResponseGenericDto<bool> { Success = true, Message = UserMessage.ContrasenaCambiada };
+			return new ResponseGenericDto<bool> { Success = true, Message = UserMessageResource.ContrasenaCambiada };
 		}
 
 		/// <summary>
@@ -162,12 +153,28 @@ namespace SlabCode.Application.Implements
 		public async Task<ResponseGenericDto<bool>> UserInactivate(UserInactivateDto userInactivate)
 		{
 			var user = await FirstUserOrDefaultAsync(u => u.UserName == userInactivate.UserName);
-			if (user is null) GenerateException(UserMessage.NoExisteUsuario);
-			UserIsActive(user.Active);
-
-			user.Active = UserState.Inactive;
+			if (user is null) GenerateException(UserMessageResource.NoExisteUsuario);
+			user.Active = userInactivate.Activate;
 			_repository.Update(user);
-			return new ResponseGenericDto<bool> { Result = true, Success = true, Message = UserMessage.DeshabilitarUsuario };
+			var message = userInactivate.Activate == UserState.Inactive
+				? UserMessageResource.DeshabilitarUsuario
+				: UserMessageResource.UsuarioHabilitado;
+
+			return new ResponseGenericDto<bool> { Result = true, Success = true, Message = UserMessageResource.DeshabilitarUsuario };
+		}
+
+		/// <summary>
+		/// Notifiers the user administrador.
+		/// </summary>
+		/// <param name="body">The body.</param>
+		/// <param name="subject">The subject.</param>
+		public async Task NotifierUserAdministrador(string body, string subject)
+		{
+			var users = await _repository.GetAllAsync(g => g.Active == UserState.Active && g.Role == RoleType.Administrator);
+			foreach (var user in users)
+			{
+				await SendUserEmail(user.Email, body, subject);
+			}
 		}
 
 		/// <summary>
@@ -196,8 +203,31 @@ namespace SlabCode.Application.Implements
 		{
 			if (UserState.Inactive.CompareTo(active) == decimal.Zero)
 			{
-				GenerateException(UserMessage.UsuarioDeshabilitado);
+				GenerateException(UserMessageResource.UsuarioDeshabilitado);
 			}
+		}
+
+		/// <summary>
+		/// Sends the user email.
+		/// </summary>
+		/// <param name="email">The email.</param>
+		/// <param name="body">The body.</param>
+		/// <param name="subject">The subject.</param>
+		private async Task SendUserEmail(string email, string body, string subject)
+		{
+			var mailConfig = new MailConfigDto
+			{
+				Subject = subject,
+				From = _mailConfiguration.From,
+				To = email,
+				Body = body,
+				User = _mailConfiguration.Username,
+				Password = _mailConfiguration.Password,
+				Port = _mailConfiguration.Port,
+				Host = _mailConfiguration.Host,
+				EnableSsl = _mailConfiguration.EnableSsl
+			};
+			await _mailService.SendMailAsync(mailConfig);
 		}
 	}
 }

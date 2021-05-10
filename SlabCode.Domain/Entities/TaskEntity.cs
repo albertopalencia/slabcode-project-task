@@ -42,7 +42,7 @@ namespace SlabCode.Domain.Entities
         /// Gets or sets the identifier proyect.
         /// </summary>
         /// <value>The identifier proyect.</value>
-        public int IdProyect { get; set; }
+        public int ProjectId { get; set; }
         /// <summary>
         /// Gets or sets the state of the task.
         /// </summary>
@@ -52,6 +52,6 @@ namespace SlabCode.Domain.Entities
         /// Gets or sets the proyect.
         /// </summary>
         /// <value>The proyect.</value>
-        public ProyectEntity Proyect { get; set; }
+        public ProjectEntity Project { get; set; }
     }
 }
