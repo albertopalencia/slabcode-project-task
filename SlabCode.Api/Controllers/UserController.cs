@@ -53,13 +53,13 @@ namespace SlabCode.Api.Controllers
 		/// </summary>
 		/// <param name="user">The user.</param>
 		/// <returns>Task&lt;IActionResult&gt;.</returns>
-		[HttpPost("Create")]
+		[HttpPost ]
 		[ProducesResponseType((int)HttpStatusCode.Created, Type = typeof(ResponseGenericDto<bool>))]
 		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
-		public async Task<IActionResult> Create(UserCreateDto user)
+		public async Task<IActionResult> CreateUser(UserCreateDto user)
 		{
 			var userCreated = await _userService.Create(user);
-			return CreatedAtAction("Create", userCreated);
+			return CreatedAtAction("CreateUser", userCreated);
 		}
 
 		/// <summary>

@@ -53,10 +53,10 @@ namespace SlabCode.Api.Controllers
 		/// </summary>
 		/// <param name="id">The identifier.</param>
 		/// <returns>Task&lt;IActionResult&gt;.</returns>
-		[HttpGet("GetByTaskId:{id}")]
+		[HttpGet("{id:int}")]
 		[ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseGenericDto<List<TaskListDto>>))]
 		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
-		public async Task<IActionResult> GetProjectById(int id)
+		public async Task<IActionResult> GetTaskById(int id)
 		{
 			var response = await _taskService.GetByTaskId(id);
 			return Ok(response);
@@ -67,13 +67,13 @@ namespace SlabCode.Api.Controllers
 		/// </summary>
 		/// <param name="project">The project.</param>
 		/// <returns>Task&lt;IActionResult&gt;.</returns>
-		[HttpPost("Create")]
+		[HttpPost]
 		[ProducesResponseType((int)HttpStatusCode.Created, Type = typeof(ResponseGenericDto<bool>))]
 		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
-		public async Task<IActionResult> Create([FromBody] TaskCreateDto project)
+		public async Task<IActionResult> CreateTask([FromBody] TaskCreateDto project)
 		{
 			var response = await _taskService.CreateTask(project);
-			return CreatedAtAction("Create", response);
+			return CreatedAtAction("CreateTask", response);
 		}
 
 		/// <summary>
@@ -82,8 +82,8 @@ namespace SlabCode.Api.Controllers
 		/// <param name="id">The identifier.</param>
 		/// <param name="project">The project.</param>
 		/// <returns>Task&lt;IActionResult&gt;.</returns>
-		[HttpPut("UpdateTask:{id}")]
-		[ProducesResponseType((int)HttpStatusCode.Created, Type = typeof(ResponseGenericDto<bool>))]
+		[HttpPut("UpdateTask/{id:int}")]
+		[ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseGenericDto<bool>))]
 		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
 		public async Task<IActionResult> UpdateTask(int id, [FromBody] TaskUpdateDto project)
 		{
@@ -96,7 +96,7 @@ namespace SlabCode.Api.Controllers
 		/// </summary>
 		/// <param name="id">The identifier.</param>
 		/// <returns>Task&lt;IActionResult&gt;.</returns>
-		[HttpPut("TaskComplete:{id}")]
+		[HttpPut("TaskComplete/{id:int}")]
 		[ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseGenericDto<bool>))]
 		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
 		public async Task<IActionResult> TaskComplete(int id)
@@ -110,10 +110,10 @@ namespace SlabCode.Api.Controllers
 		/// </summary>
 		/// <param name="id">The identifier.</param>
 		/// <returns>Task&lt;IActionResult&gt;.</returns>
-		[HttpDelete("{id}")]
+		[HttpDelete("RemoveTask/{id:int}")]
 		[ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ResponseGenericDto<bool>))]
 		[ProducesResponseType((int)HttpStatusCode.BadRequest)]
-		public async Task<IActionResult> Remove(int id)
+		public async Task<IActionResult> RemoveTask(int id)
 		{
 			var response = await _taskService.RemoveTask(id);
 			return Ok(response);
