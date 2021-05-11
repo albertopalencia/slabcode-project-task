@@ -29,16 +29,18 @@ namespace SlabCode.Api.Validators
 		/// </summary>
 		public ProjectCreateValidator()
 		{
-			RuleFor(n => n.ProjectName).NotNull().NotEmpty().WithMessage("el nombre del proyecto es obligatorio");
-			RuleFor(n => n.Description).NotNull().NotEmpty()
-				.WithMessage("la descripcion es obligatorio");
+			RuleFor(n => n.ProjectName).NotNull().NotEmpty()
+				.WithMessage("campo obligatorio");
 
-			RuleFor(x => x.DateInit).GreaterThanOrEqualTo(DateTime.Now)
-				.WithMessage("debe ser posterior o igual al día presente");
+			RuleFor(n => n.Description).NotNull().NotEmpty()
+				.WithMessage("campo obligatorio");
+
+			RuleFor(x => x.DateInit).LessThan(DateTime.Now)
+				.WithMessage("Debe ser posterior o igual al día presente");
 
 			RuleFor(x => x.DateEnd)
 				.GreaterThanOrEqualTo(x => x.DateInit)
-				.WithMessage("La fecha de finalizacion debe ser posterior o igual a la fecha de inicio");
+				.WithMessage("Debe ser posterior o igual a la fecha de inicio");
 		}
 	}
 }

@@ -47,6 +47,7 @@ namespace SlabCode.Domain.DTO.Project
 		/// </summary>
 		/// <value>The date ended.</value>
 		public DateTime? DateEnd { get; set; }
+   
 
 		/// <summary>
 		/// Performs an implicit conversion from <see cref="TaskCreateDto"/> to <see cref="ProjectEntity"/>.
